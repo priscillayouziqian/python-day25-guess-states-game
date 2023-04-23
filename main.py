@@ -14,11 +14,14 @@ guessed_states = []
 while len(guessed_states) < 50:
     answer_state = screen.textinput(title=f"{len(guessed_states)}/50 States Correct", prompt="What's another state's name?").title()
     if answer_state == "Exit":
-        missing_states = []
-        #  IMPORTANT: comparing items in two lists
-        for state in all_states:  # the longer list
-            if state not in guessed_states:  # the shorter list
-                missing_states.append(state)
+        # using list comprehension:
+        missing_states = [state for state in all_states if state not in guessed_states]
+        # the following is not using list comprehension:
+        # missing_states = []
+        # #  IMPORTANT: comparing items in two lists
+        # for state in all_states:  # the longer list
+        #     if state not in guessed_states:  # the shorter list
+        #         missing_states.append(state)
 
         # convert list to dataframe, then convert to excel
         new_data = pandas.DataFrame(missing_states)
